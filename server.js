@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -10,7 +12,7 @@ app.use(cors());
 
 //Iniciando o DB
 mongoose.connect(
-    "mongodb://localhost:27017/nodeapi",
+    process.env.MONGO_URL,
     { useNewUrlParser: true }
 );
 requireDir("./src/models");
@@ -18,4 +20,4 @@ requireDir("./src/models");
 //Rotas
 app.use("/api", require("./src/routes"));
 
-app.listen(3001);
+app.listen(process.env.PORT || 3001);
